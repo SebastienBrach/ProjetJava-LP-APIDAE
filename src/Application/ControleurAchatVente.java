@@ -1,43 +1,3 @@
-//package Application;
-
-//
-//import Metier.Catalogue;
-//import Metier.I_Catalogue;
-//import Presentation.FenetreAchat;
-//import Presentation.FenetreVente;
-//
-//public class ControleurAchatVente {
-//	
-//	private I_Catalogue catalogue;
-//	private String[] nomProduit;
-//
-//	public ControleurAchatVente() {
-//		this.catalogue = new Catalogue();
-//		this.nomProduit = this.catalogue.getNomProduits();
-//	}
-//	
-//	public void demanderAchat() {
-//		new FenetreAchat(nomProduit);		
-//	}
-//	
-//	public void demanderVente() {
-//		new FenetreVente(nomProduit);
-//	}
-//	
-//	public String acheter(String nom, int qte) {
-//		catalogue.acheterStock(nom, qte);
-//		return "Vous avez acheter "+qte+" "+nom;
-//	}
-//	
-//	public String vendre(String nom, int qte) {
-//		catalogue.vendreStock(nom, qte);
-//		return "Vous avez vendu "+qte+" "+nom;
-//	}
-//}
-//
-
-
-
 package Application;
 
 import java.sql.SQLException;
@@ -51,11 +11,6 @@ import Presentation.FenetrePrincipale;
 import Presentation.FenetreSuppressionProduit;
 import Presentation.FenetreVente;
 
-/**
- * ControleurAchatVente
- * @author Sébastien
- *
- */
 public class ControleurAchatVente {
 	
 	private static FenetreAchat fenetreAchat;
@@ -64,30 +19,14 @@ public class ControleurAchatVente {
 	public ControleurAchatVente() {
 	}
 	
-	/**
-	 * demanderAchat() 
-	 * Ouvre la FenetreAchat en passant en paramètre le nom des produits (via ControleurFacade)
-	 */
 	public static void demanderAchat() {
 		ControleurAchatVente.fenetreAchat = new FenetreAchat(ControleurFacade.getCatalogue().getNomProduits());		
 	}
 	
-	/**
-	 * demanderVente() 
-	 * Ouvre la FenetreVente en passant en paramètre le nom des produits (via ControleurFacade)
-	 */
 	public static void demanderVente() {
 		ControleurAchatVente.fenetreVente = new FenetreVente(ControleurFacade.getCatalogue().getNomProduits());
 	}
 	
-	/**
-	 * acheter(String nom, int qte)
-	 * 
-	 * @param nom
-	 * @param qte
-	 * @return
-	 * @throws SQLException
-	 */
 	public static boolean acheter(String nom, int qte) throws SQLException {
 		I_Produit produit = new Produit(nom , 0 , qte);
 		try {
@@ -97,14 +36,7 @@ public class ControleurAchatVente {
 		}
 		return ControleurFacade.getCatalogue().acheterStock(nom, qte);
 	}
-	
-	/**
-	 * 
-	 * @param nom
-	 * @param qte
-	 * @return
-	 * @throws SQLException
-	 */
+
 	public static boolean vendre(String nom, int qte) throws SQLException {
 		I_Produit produit = new Produit(nom, 0, qte);
 		try {
