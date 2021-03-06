@@ -25,7 +25,7 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	private String mdp = "21092020";
 	
 	/**
-	 * ProduitDAORelationnel()
+	 * ProduitDAORelationnel() =>
 	 */
 	public void ProduitDAORelationnel() {
 		try {
