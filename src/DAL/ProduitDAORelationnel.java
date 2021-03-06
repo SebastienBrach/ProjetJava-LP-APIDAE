@@ -13,9 +13,6 @@ import Metier.Produit;
 
 public class ProduitDAORelationnel implements I_ProduitDAO {
 	
-	/**
-	 * Initialisation de variables
-	 */
 	private PreparedStatement pst;
 	private ResultSet rs;
 	private Connection cn;
@@ -25,7 +22,8 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	private String mdp = "21092020";
 	
 	/**
-	 * ProduitDAORelationnel() => sebs
+	 * ProduitDAORelationnel() 
+	 * Permet de se connecter à la BD
 	 */
 	public void ProduitDAORelationnel() {
 		try {
@@ -39,7 +37,9 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	}
 	
 	/**
-	 * create(I_Produit p) =>
+	 * create(I_Produit p)
+	 * Ajoute un produit à la table Produit
+	 * Appel de la procédure nouveauProduit au lieu de faire un INSERT INTO classique (car on ne peut pas ajouter l'id en dur)
 	 */
 	public boolean create(I_Produit p) {
 		ProduitDAORelationnel();
@@ -59,7 +59,8 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	}
 	
 	/**
-	 * createAll(List<I_Produit> produits) =>
+	 * createAll(List<I_Produit> produits)
+	 * Retourne un compteur qui permet de connaître le nombre de produit dans le catalogue
 	 */
 	@Override
 	public int createAll(List<I_Produit> produits) throws DAOException, SQLException {
@@ -73,7 +74,8 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	}
 	
 	/**
-	 * 
+	 * readByName(String nomProduit)
+	 * Affiche un produit en fonction de son nom
 	 */
 	public I_Produit readByName(String nomProduit) throws DAOException, SQLException {
 		ProduitDAORelationnel();
@@ -94,7 +96,8 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	}
 	
 	/**
-	 * 
+	 * read()
+	 * Affiche la liste des produits
 	 */
 	public List<I_Produit> read() throws DAOException, SQLException {
 		ProduitDAORelationnel();
@@ -118,7 +121,8 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	}
 	
 	/**
-	 * 
+	 * update(I_Produit p)
+	 * Permet de mettre à jour un produit (notamment sur la vente/achat)
 	 */
 	public boolean update(I_Produit p) throws DAOException, SQLException {
 		ProduitDAORelationnel();
@@ -139,7 +143,8 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	}
 	
 	/**
-	 * 
+	 * delete(I_Produit p)
+	 * Permet de supprimer un produit
 	 */
 	public boolean delete(I_Produit p) throws DAOException, SQLException {
 		ProduitDAORelationnel();
