@@ -52,7 +52,7 @@ import Presentation.FenetreSuppressionProduit;
 import Presentation.FenetreVente;
 
 /**
- * 
+ * ControleurAchatVente
  * @author Sébastien
  *
  */
@@ -65,20 +65,23 @@ public class ControleurAchatVente {
 	}
 	
 	/**
-	 * 
+	 * demanderAchat() 
+	 * Ouvre la FenetreAchat en passant en paramètre le nom des produits (via ControleurFacade)
 	 */
 	public static void demanderAchat() {
 		ControleurAchatVente.fenetreAchat = new FenetreAchat(ControleurFacade.getCatalogue().getNomProduits());		
 	}
 	
 	/**
-	 * 
+	 * demanderVente() 
+	 * Ouvre la FenetreVente en passant en paramètre le nom des produits (via ControleurFacade)
 	 */
 	public static void demanderVente() {
 		ControleurAchatVente.fenetreVente = new FenetreVente(ControleurFacade.getCatalogue().getNomProduits());
 	}
 	
 	/**
+	 * acheter(String nom, int qte)
 	 * 
 	 * @param nom
 	 * @param qte
