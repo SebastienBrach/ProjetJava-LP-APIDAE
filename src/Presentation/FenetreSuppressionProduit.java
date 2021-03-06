@@ -1,0 +1,50 @@
+package Presentation;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+import Application.ControleurCreationSuppression;
+import Application.ControleurFacade;
+
+
+public class FenetreSuppressionProduit extends JFrame implements ActionListener {
+
+	private JButton btSupprimer;
+	private JComboBox<String> combo;
+	
+	public FenetreSuppressionProduit(String lesProduits[]) {
+		
+		setTitle("Suppression produit");
+		setBounds(500, 500, 200, 105);
+		Container contentPane = getContentPane();
+		contentPane.setLayout(new FlowLayout());
+		btSupprimer = new JButton("Supprimer");
+
+		combo = new JComboBox<String>(lesProduits);
+		combo.setPreferredSize(new Dimension(100, 20));
+		contentPane.add(new JLabel("Produit"));
+		contentPane.add(combo);
+		contentPane.add(btSupprimer);
+
+		btSupprimer.addActionListener(this);
+
+		this.setVisible(true);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+//		if(e.getSource() == btSupprimer) {
+//			ControleurCreationSuppression cs = new ControleurCreationSuppression();
+//			String nomProduit = (String) combo.getSelectedItem();
+//			cs.supprimerProduit(nomProduit);
+//		}
+//		this.dispose();
+		
+		if (e.getSource() == btSupprimer) {
+			String nomProd=(String)combo.getSelectedItem();
+			ControleurFacade.getCatalogue().removeProduit(nomProd);
+		}
+		this.dispose();
+	}
+
+}
