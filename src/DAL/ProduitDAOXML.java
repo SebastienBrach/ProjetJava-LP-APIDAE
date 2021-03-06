@@ -13,7 +13,8 @@ import Metier.Produit;
 
 
 public class ProduitDAOXML {
-	private String uri = "C:/Users/Sébastien/Desktop";
+//	private String uri = "C://Users//Sébastien//Desktop//Produits.xml";
+	private String uri = "C:/Users";
 	private Document doc;
 
 	public ProduitDAOXML() {
@@ -81,7 +82,7 @@ public class ProduitDAOXML {
 
 	public List<I_Produit> lireTous() {
 
-		List<I_Produit> l = new ArrayList<I_Produit>();
+		List<I_Produit> liste = new ArrayList<I_Produit>();
 		try {
 			Element root = doc.getRootElement();
 			List<Element> lProd = root.getChildren("produit");
@@ -90,12 +91,12 @@ public class ProduitDAOXML {
 				String nomP = prod.getAttributeValue("nom");
 				Double prix = Double.parseDouble(prod.getChild("prixHT").getText());
 				int qte = Integer.parseInt(prod.getChild("quantite").getText());
-				l.add(new Produit(nomP, prix, qte));
+				liste.add(new Produit(nomP, prix, qte));
 			}
 		} catch (Exception e) {
 			System.out.println("erreur lireTous tous les produits");
 		}
-		return l;
+		return liste;
 	}
 
 	private boolean sauvegarde() {
