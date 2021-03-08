@@ -13,8 +13,9 @@ import Metier.Produit;
 
 
 public class ProduitDAOXML {
-//	private String uri = "C://Users//Sébastien//Desktop//Produits.xml";
-	private String uri = "C:/Users";
+	// si accent dans uri, ne marche pas :(
+//	private String uri = "C://Users//Sï¿½bastien//Desktop//Produits.xml";
+	private String uri = "C:/Produits.xml";
 	private Document doc;
 
 	public ProduitDAOXML() {

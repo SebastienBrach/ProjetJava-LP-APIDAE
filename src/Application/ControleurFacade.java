@@ -10,9 +10,11 @@ import Metier.I_Catalogue;
 import Presentation.FenetrePrincipale;
 
 /**
- * 
- * @author Sébastien
- *
+ * ControleurFacade
+ * Controleur Central
+ * Permet d'initialiser un seul catalogue
+ * Permet de faire de l'aggressive loading
+ * Permet de choisir facilement le type de stockage de données
  */
 public class ControleurFacade {
 	
@@ -23,10 +25,6 @@ public class ControleurFacade {
 	private static I_Catalogue catalogue;
 	private static I_ProduitDAO produitDao;
 	
-	/**
-	 * 
-	 * @throws SQLException
-	 */
 	public ControleurFacade() throws SQLException{
 		ControleurFacade.produitDao = ProduitDAOFactory.getProduitDAO("XML");
 		ControleurFacade.catalogue = new Catalogue();
@@ -41,46 +39,18 @@ public class ControleurFacade {
 		this.afficherFenetrePrincipale();
 	}
 	
-	/**
-	 * 
-	 */
 	private void afficherFenetrePrincipale() { ControleurFacade.fenetrePrincipale = new FenetrePrincipale();}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public static I_Catalogue getCatalogue() { return ControleurFacade.catalogue;}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public ControleurCreationSuppression getControleurCreationSuppression() { return controleurCreationSuppression;}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public ControleurAchatVente getControleurAchatVente() { return controleurAchatVente;}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public ControleurAffichage getControleurAffichage() { return controleurAffichage;}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public static I_ProduitDAO getProduitDao() { return produitDao;}
 	
-	/**
-	 * 
-	 * @param args
-	 * @throws SQLException
-	 */
 	public static void main(String[] args) throws SQLException {
 		new ControleurFacade();
 	}

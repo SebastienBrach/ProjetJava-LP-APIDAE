@@ -2,7 +2,8 @@ package DAL;
 
 public class ProduitDAOFactory {
 	/**
-	 * 
+	 * getProduitDAO(String choix)
+	 * Permet l'ajout d'un nouveau type de stockage des données
 	 * @param choix
 	 * @return
 	 */

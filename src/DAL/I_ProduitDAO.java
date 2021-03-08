@@ -4,11 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 import Metier.I_Produit;
 
-/**
- * 
- * @author Sébastien
- *
- */
 public interface I_ProduitDAO {
 	boolean create(I_Produit produit) throws DAOException, SQLException;
     int createAll(List<I_Produit> produits) throws DAOException, SQLException;

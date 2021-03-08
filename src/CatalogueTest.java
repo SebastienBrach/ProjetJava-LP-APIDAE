@@ -12,7 +12,11 @@ import Metier.I_Catalogue;
 import Metier.I_Produit;
 
 
-
+/**
+ * Test pour la classe Catalogue
+ * @author Sébastien
+ *
+ */
 public class CatalogueTest {
 
 	I_Catalogue cat;
