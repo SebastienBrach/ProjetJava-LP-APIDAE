@@ -1,20 +1,22 @@
 package DAL;
 
-public class ProduitDAOFactory {
+public abstract class ProduitDAOFactory {
 	/**
 	 * getProduitDAO(String choix)
 	 * Permet l'ajout d'un nouveau type de stockage des données
 	 * @param choix
 	 * @return
 	 */
-    public static I_ProduitDAO getProduitDAO(String choix) {
+    public static ProduitDAOFactory getFactory(String choix) {
     	I_ProduitDAO produitDAO = null;
     	if(choix.equals("Relationnel")) {
-    		produitDAO = new ProduitDAORelationnel();
+            return new ProduitDAORelationnelConcreteFactory();
     	}
-    	else if(choix.equals("XML")) {
-    		produitDAO = new AdaptateurDAOXML();
+    	if(choix.equals("XML")) {
+            return new ProduitDAOXMLConcreteFactory();
     	}
-        return produitDAO;
+        return null;
     }
+    
+    public abstract I_ProduitDAO getInstance();
 }

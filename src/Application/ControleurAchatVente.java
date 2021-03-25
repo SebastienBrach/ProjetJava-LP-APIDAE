@@ -3,6 +3,7 @@ package Application;
 import java.sql.SQLException;
 
 import DAL.DAOException;
+import Metier.I_Catalogue;
 import Metier.I_Produit;
 import Metier.Produit;
 import Presentation.FenetreAchat;

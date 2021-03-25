@@ -3,21 +3,22 @@ package Presentation;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import Metier.I_Catalogue;
 
 public class FenetreAffichage extends JFrame implements ActionListener {
 
 	private JButton btOK;
 	
-	public FenetreAffichage(String texte) {
+	public FenetreAffichage(I_Catalogue catalogue) {
 
-		setTitle("Affichage");
+		setTitle(catalogue.getNom());
 		setBounds(500, 500, 450, 250);
 		JPanel panHaut = new JPanel();
 		JPanel panBas = new JPanel();
 		panHaut.setLayout(new BorderLayout());
 		panBas.setLayout(new FlowLayout());
 		
-		JTextArea jtaSortie = new JTextArea(texte,10,5);
+		JTextArea jtaSortie = new JTextArea(catalogue.toString(),10,5);
 		btOK = new JButton("Quitter");
 		
 		Container contentPane = getContentPane();

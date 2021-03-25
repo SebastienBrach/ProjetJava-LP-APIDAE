@@ -9,6 +9,6 @@ public class ControleurAffichage {
 	public ControleurAffichage() {}
 	
 	public static void demanderAffichage() {
-		ControleurAffichage.fenetreAffichage = new FenetreAffichage(ControleurFacade.getCatalogue().toString());
+		ControleurAffichage.fenetreAffichage = new FenetreAffichage(ControleurFacade.getCatalogue());
 	}
 }

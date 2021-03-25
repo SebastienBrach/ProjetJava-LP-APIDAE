@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import Application.ControleurAffichage;
-import Application.ControleurCreationSuppression;
+import Application.ControleurProduit;
 import Application.ControleurAchatVente;
 
 
@@ -70,7 +70,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		ControleurCreationSuppression controleurCreationSuppression = new ControleurCreationSuppression();
+		ControleurProduit controleurProduit = new ControleurProduit();
 		ControleurAchatVente controleurAchatVente = new ControleurAchatVente();
 		ControleurAffichage controleurAffichage = new ControleurAffichage();
 //		String[] tabProduits = new String[] { "Mars", "Raider", "Twix", "Treets", "M&M's", "Smarties" };
@@ -78,9 +78,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 		if (e.getSource() == btAfficher) 
 			controleurAffichage.demanderAffichage();
 		if (e.getSource() == btNouveauProduit) 
-			controleurCreationSuppression.demanderAjout();
+			controleurProduit.afficherFenetreNouveauProduit();
 		if (e.getSource() == btSupprimerProduit) 
-			controleurCreationSuppression.demanderSuppression();
+			controleurProduit.afficherFenetreSuppressionProduit();
 		if (e.getSource() == btAchat) 
 			controleurAchatVente.demanderAchat();
 		if (e.getSource() == btVente) 
@@ -102,9 +102,4 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 	public void windowDeiconified(WindowEvent arg0) {}
 	public void windowIconified(WindowEvent arg0) {}
 	public void windowOpened(WindowEvent arg0) {}
-
-	public static void main(String[] args) {
-		new FenetrePrincipale();
-	}
-
 }

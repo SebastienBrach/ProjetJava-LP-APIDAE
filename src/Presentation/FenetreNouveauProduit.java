@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
-import Application.ControleurCreationSuppression;
+import Application.ControleurProduit;
 
 public class FenetreNouveauProduit extends JFrame implements ActionListener {
 
@@ -57,7 +57,7 @@ public class FenetreNouveauProduit extends JFrame implements ActionListener {
 			double prixHT=Double.parseDouble(txtPrixHT.getText());
 			int quantite=Integer.parseInt(txtQte.getText());
 			try {
-				ControleurCreationSuppression.ajouterProduit(nomProd, prixHT, quantite);
+				ControleurProduit.addProduit(nomProd, prixHT, quantite);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

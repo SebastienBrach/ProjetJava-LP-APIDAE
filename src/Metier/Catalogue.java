@@ -4,12 +4,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import DAL.I_ProduitDAO;
+import DAL.DAOException;
+import DAL.ProduitDAOFactory;
+
 public class Catalogue implements I_Catalogue {
 	
-	private ArrayList<I_Produit> lesProduits;
+	private I_ProduitDAO produitDAO = ProduitDAOFactory.getFactory("Relationnel").getInstance();
+	private ArrayList<I_Produit> lesProduits = new ArrayList<>();
+	private int id;
+	private String nom;
 	
 	public Catalogue() {
 		this.lesProduits = new ArrayList<>();
+	}
+	
+	public Catalogue(String nom) {
+		this.lesProduits = new ArrayList<>();
+		this.nom = nom;
+
+		try {
+			this.lesProduits = (ArrayList<I_Produit>) this.produitDAO.readByCatalogue(this.nom);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Catalogue(String nom, int idCatalogue)
+	{
+		this(nom);
+		this.id = idCatalogue;
 	}
 
 	@Override
@@ -127,5 +151,20 @@ public class Catalogue implements I_Catalogue {
         return message;
     }
 	
+
+	@Override
+	public int getId() {
+		return id;
+	}
+	
+	@Override
+	public String getNom() {
+		return this.nom;
+	}
+
+	@Override
+	public List<I_Produit> getProduits() {
+		return this.lesProduits;
+	}
 	
 }

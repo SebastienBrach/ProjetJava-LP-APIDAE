@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 import Application.ControleurAchatVente;
-import Application.ControleurCreationSuppression;
+import Application.ControleurFacade;
 
 public class FenetreVente extends JFrame implements ActionListener {
 

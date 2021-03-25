@@ -17,12 +17,12 @@ public class AdaptateurDAOXML implements I_ProduitDAO {
 		this.produitXML = new ProduitDAOXML();
 	}
 
-	public boolean create(I_Produit produit) throws DAOException {
+	public boolean create(I_Produit produit, int catalogueId) throws DAOException {
 		return this.produitXML.creer(produit);
 	}
 	
 	@Override
-	public int createAll(List<I_Produit> produits) throws DAOException, SQLException {
+	public int createAll(List<I_Produit> produits, int catalogueId) throws DAOException, SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -30,6 +30,16 @@ public class AdaptateurDAOXML implements I_ProduitDAO {
 	@Override
 	public I_Produit readByName(String nomProduit) throws DAOException, SQLException {
 		return this.produitXML.lire(nomProduit);
+	}
+	
+	@Override
+	public List<I_Produit> readByCatalogue(String nomCatalogue) throws DAOException {
+		try {
+			List<I_Produit> produits = this.read();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override
@@ -46,4 +56,5 @@ public class AdaptateurDAOXML implements I_ProduitDAO {
 	public boolean delete(I_Produit produit) throws DAOException, SQLException {
 		return this.produitXML.supprimer(produit);
 	}
+	
 }

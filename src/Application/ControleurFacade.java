@@ -18,22 +18,22 @@ import Presentation.FenetrePrincipale;
  */
 public class ControleurFacade {
 	
-	private ControleurCreationSuppression controleurCreationSuppression; 
+	private ControleurProduit controleurProduit; 
 	private ControleurAchatVente controleurAchatVente;
 	private ControleurAffichage controleurAffichage; 
 	private static FenetrePrincipale fenetrePrincipale;
 	private static I_Catalogue catalogue;
 	private static I_ProduitDAO produitDao;
 	
-	public ControleurFacade() throws SQLException{
-		ControleurFacade.produitDao = ProduitDAOFactory.getProduitDAO("XML");
+	public ControleurFacade(I_Catalogue catalogue) throws SQLException{
+		ControleurFacade.produitDao = ProduitDAOFactory.getFactory("Relationnel").getInstance();
 		ControleurFacade.catalogue = new Catalogue();
-		try {
-			ControleurFacade.catalogue.addProduits(produitDao.read());
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}
-		this.controleurCreationSuppression = new ControleurCreationSuppression();
+//		try {
+//			ControleurFacade.catalogue.addProduits(produitDao.read());
+//		} catch (DAOException e) {
+//			e.printStackTrace();
+//		}
+		this.controleurProduit = new ControleurProduit();
 		this.controleurAchatVente = new ControleurAchatVente();
 		this.controleurAffichage = new ControleurAffichage();
 		this.afficherFenetrePrincipale();
@@ -43,15 +43,15 @@ public class ControleurFacade {
 	
 	public static I_Catalogue getCatalogue() { return ControleurFacade.catalogue;}
 	
-	public ControleurCreationSuppression getControleurCreationSuppression() { return controleurCreationSuppression;}
+	public ControleurProduit getControleurProduit() { return controleurProduit;}
 	
 	public ControleurAchatVente getControleurAchatVente() { return controleurAchatVente;}
 	
 	public ControleurAffichage getControleurAffichage() { return controleurAffichage;}
 	
 	public static I_ProduitDAO getProduitDao() { return produitDao;}
-	
-	public static void main(String[] args) throws SQLException {
-		new ControleurFacade();
-	}
+		
+//	public static void main(String[] args) throws SQLException {
+//		new ControleurFacade();
+//	}
 }

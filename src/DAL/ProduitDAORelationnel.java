@@ -41,14 +41,16 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	 * Ajoute un produit à la table Produit
 	 * Appel de la procédure nouveauProduit au lieu de faire un INSERT INTO classique (car on ne peut pas ajouter l'id en dur)
 	 */
-	public boolean create(I_Produit p) {
+	public boolean create(I_Produit p, int catalogueId) {
 		ProduitDAORelationnel();
 		try {
-			String query = "CALL nouveauProduit (?, ?, ?)";
+			String query = "CALL nouveauProduit (?, ?, ?, ?)";
 			this.pst = this.cn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			this.pst.setString(1, p.getNom());
 			this.pst.setDouble(2, p.getPrixUnitaireHT());
 			this.pst.setInt(3, p.getQuantite());
+			this.pst.setInt(4, catalogueId);
+
 			this.rs = pst.executeQuery();
 			return true;
 		} catch(SQLException e) {
@@ -63,10 +65,10 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	 * Retourne un compteur qui permet de connaître le nombre de produit dans le catalogue
 	 */
 	@Override
-	public int createAll(List<I_Produit> produits) throws DAOException, SQLException {
+	public int createAll(List<I_Produit> produits, int catalogueId) throws DAOException, SQLException {
 		int compteurProduit = 0;
         for (I_Produit newProduit : produits) {
-            if (this.create(newProduit)) {
+            if (this.create(newProduit, catalogueId)) {
             	compteurProduit++;
 			}
         }
@@ -94,6 +96,55 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 		}
 		return null;
 	}
+	
+	
+	@Override
+    public List<I_Produit> readByCatalogue(String nomCatalogue) throws DAOException {
+        PreparedStatement pst = null;
+
+        try {
+            pst = cn.prepareStatement("SELECT nomProduit, prixUnitaireHT, quantiteStock" +
+                    " FROM Catalogue" +
+                    " NATURAL JOIN Produit" +
+                    " WHERE nomCatalogue = ?");
+            pst.setString(1, nomCatalogue);
+
+        } catch (SQLException e) {
+			e.printStackTrace();
+        }
+
+        ResultSet rows = null;
+
+        try {
+            rows = pst.executeQuery();
+        } catch (SQLException e) {
+			e.printStackTrace();
+        }
+
+        try {
+            List<I_Produit> produits = new ArrayList<>();
+
+            while (rows.next()) {
+                String nomProduit;
+                nomProduit = rows.getString("nomProduit");
+
+                float prixUnitaireHTProduit;
+                prixUnitaireHTProduit = rows.getFloat("prixUnitaireHTProduit");
+
+                int quantiteStockProduit;
+                quantiteStockProduit = rows.getInt("quantiteStockProduit");
+
+                produits.add(new Produit(nomProduit, prixUnitaireHTProduit, quantiteStockProduit));
+
+            }
+
+            return produits;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new DAOException();
+        }
+    }
 	
 	/**
 	 * read()
@@ -160,6 +211,7 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 			return false;
 		}	
 	}
+
 
 		
 //	public void deconnexion() throws DAOException, SQLException {

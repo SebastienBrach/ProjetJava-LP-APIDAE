@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import Application.ControleurCreationSuppression;
 import Application.ControleurFacade;
 
 
@@ -32,14 +31,7 @@ public class FenetreSuppressionProduit extends JFrame implements ActionListener 
 		this.setVisible(true);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-//		if(e.getSource() == btSupprimer) {
-//			ControleurCreationSuppression cs = new ControleurCreationSuppression();
-//			String nomProduit = (String) combo.getSelectedItem();
-//			cs.supprimerProduit(nomProduit);
-//		}
-//		this.dispose();
-		
+	public void actionPerformed(ActionEvent e) {		
 		if (e.getSource() == btSupprimer) {
 			String nomProd=(String)combo.getSelectedItem();
 			ControleurFacade.getCatalogue().removeProduit(nomProd);
