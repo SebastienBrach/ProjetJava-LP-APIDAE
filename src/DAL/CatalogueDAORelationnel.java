@@ -21,6 +21,7 @@ public class CatalogueDAORelationnel implements I_CatalogueDAO {
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String login = "brachs";
 	private String mdp = "21092020";
+	private boolean rowExist;
 	
 	/**
 	 * CatalogueDAORelationnel() 
@@ -91,35 +92,21 @@ public class CatalogueDAORelationnel implements I_CatalogueDAO {
 
     @Override
     public boolean delete(String nomCatalogue) throws DAOException {
-        PreparedStatement pst = null;
-
-        try {
-            pst = cn.prepareStatement("DELETE FROM catalogue WHERE nomCatalogue = ?");
+    	CatalogueDAORelationnel();
+		try {
+			String query = "DELETE FROM catalogue WHERE nomCatalogue = ?";
+			this.pst = this.cn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            this.pst.setString(1, nomCatalogue);
+			this.rs = pst.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         try {
-            pst.setString(1, nomCatalogue);
+            rowExist = this.rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        ResultSet rows = null;
-
-        try {
-            rows = pst.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            e.printStackTrace();
-        }
-
-        try {
-            boolean isRowExist = rows.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         return true;
     }
 }
