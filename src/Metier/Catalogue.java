@@ -1,5 +1,6 @@
 package Metier;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Catalogue implements I_Catalogue {
 		this.lesProduits = new ArrayList<>();
 	}
 	
-	public Catalogue(String nom) {
+	public Catalogue(String nom) throws SQLException {
 		this.lesProduits = new ArrayList<>();
 		this.nom = nom;
 
@@ -30,7 +31,7 @@ public class Catalogue implements I_Catalogue {
 		}
 	}
 
-	public Catalogue(String nom, int idCatalogue)
+	public Catalogue(String nom, int idCatalogue) throws SQLException
 	{
 		this(nom);
 		this.id = idCatalogue;
