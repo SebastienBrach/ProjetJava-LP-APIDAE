@@ -5,9 +5,6 @@ package Application;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import DAL.I_CatalogueDAO;
@@ -62,7 +59,7 @@ public class ControleurCatalogue {
 		ControleurCatalogue.majAffichage();
 	}
 	
-	public static void addCatalogue(String nomCatalogue)
+	public static void addCatalogue(String nomCatalogue) throws SQLException
 	{
 		I_Catalogue newCatalogue = new Catalogue(nomCatalogue);
 			try {
