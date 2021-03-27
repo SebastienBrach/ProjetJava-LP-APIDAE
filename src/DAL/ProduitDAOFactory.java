@@ -8,12 +8,13 @@ public abstract class ProduitDAOFactory {
 	 * @return
 	 */
     public static ProduitDAOFactory getFactory(String choix) {
+    	
     	I_ProduitDAO produitDAO = null;
     	if(choix.equals("Relationnel")) {
-            return new ProduitDAORelationnelConcreteFactory();
+            return new ProduitDAORelationnelTrueFactory();
     	}
     	if(choix.equals("XML")) {
-            return new ProduitDAOXMLConcreteFactory();
+            return new ProduitDAOXMLTrueFactory();
     	}
         return null;
     }

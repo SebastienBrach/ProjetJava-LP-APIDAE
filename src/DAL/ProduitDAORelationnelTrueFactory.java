@@ -1,6 +1,6 @@
 package DAL;
 
-public class ProduitDAORelationnelConcreteFactory extends ProduitDAOFactory {
+public class ProduitDAORelationnelTrueFactory extends ProduitDAOFactory {
     @Override
     public I_ProduitDAO getInstance() {
         return new ProduitDAORelationnel();

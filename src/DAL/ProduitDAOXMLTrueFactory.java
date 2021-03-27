@@ -1,6 +1,6 @@
 package DAL;
 
-public class ProduitDAOXMLConcreteFactory extends ProduitDAOFactory {
+public class ProduitDAOXMLTrueFactory extends ProduitDAOFactory {
     @Override
     public I_ProduitDAO getInstance() {
         return new AdaptateurDAOXML();

@@ -107,7 +107,6 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 		catalogueDetails = catalogueDetailsList.toArray(catalogueDetails);
 
 		modifierDetailCatalogues(catalogueDetails);
-		modifierNbCatalogues(catalogueNames.length);
 		setVisible(true);
 	}
 
@@ -145,10 +144,6 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void modifierNbCatalogues(int nb) {
-		lbNbCatalogues.setText(nb + " catalogues");
-	}
-	
 	private void modifierDetailCatalogues(String[] detailCatalogues) {
 		taDetailCatalogues.setText("");
 		if (detailCatalogues != null) {
@@ -161,7 +156,6 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 	public void majAffichage(String[] nomsCatalogues,String[] detailCatalogues) {
 		this.modifierListesCatalogues(nomsCatalogues);
 		this.modifierDetailCatalogues(detailCatalogues);
-		this.modifierNbCatalogues(nomsCatalogues.length);
 	}
 	
 	public static void main(String[] args) {

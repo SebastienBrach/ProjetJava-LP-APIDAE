@@ -28,7 +28,7 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	public void ProduitDAORelationnel() {
 		try {
 			Class.forName(driver);
-			this.cn = DriverManager.getConnection(url, login, mdp);
+			this.cn = DriverManager.getConnection(this.url, this.login, this.mdp);
 		}
 		catch(SQLException | ClassNotFoundException e){
 			System.out.println(e.getMessage());
@@ -44,7 +44,7 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	public boolean create(I_Produit p, int catalogueId) {
 		ProduitDAORelationnel();
 		try {
-			String query = "CALL nouveauProduit (?, ?, ?, ?)";
+			String query = "CALL nouveauProduit(?, ?, ?, ?)";
 			this.pst = this.cn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			this.pst.setString(1, p.getNom());
 			this.pst.setDouble(2, p.getPrixUnitaireHT());
@@ -99,24 +99,14 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
 	
 	
 	@Override
-    public List<I_Produit> readByCatalogue(String nomCatalogue) throws DAOException {
-        PreparedStatement pst = null;
-
+    public List<I_Produit> readByCatalogue(String nomCatalogue) throws DAOException, SQLException {
+		ProduitDAORelationnel();
+		String query = "SELECT nomProduit, prixUnitaireHT, quantiteStock FROM Catalogue NATURAL JOIN Produit WHERE nomCatalogue = ?";
+		this.pst = this.cn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		this.pst.setString(1, nomCatalogue);
+ 
         try {
-            pst = cn.prepareStatement("SELECT nomProduit, prixUnitaireHT, quantiteStock" +
-                    " FROM Catalogue" +
-                    " NATURAL JOIN Produit" +
-                    " WHERE nomCatalogue = ?");
-            pst.setString(1, nomCatalogue);
-
-        } catch (SQLException e) {
-			e.printStackTrace();
-        }
-
-        ResultSet rows = null;
-
-        try {
-            rows = pst.executeQuery();
+            this.rs = pst.executeQuery();
         } catch (SQLException e) {
 			e.printStackTrace();
         }
@@ -124,24 +114,18 @@ public class ProduitDAORelationnel implements I_ProduitDAO {
         try {
             List<I_Produit> produits = new ArrayList<>();
 
-            while (rows.next()) {
+            while (this.rs.next()) {
                 String nomProduit;
-                nomProduit = rows.getString("nomProduit");
-
+                nomProduit = this.rs.getString("nomProduit");
                 float prixUnitaireHTProduit;
-                prixUnitaireHTProduit = rows.getFloat("prixUnitaireHTProduit");
-
+                prixUnitaireHTProduit = this.rs.getFloat("prixUnitaireHTProduit");
                 int quantiteStockProduit;
-                quantiteStockProduit = rows.getInt("quantiteStockProduit");
-
+                quantiteStockProduit = this.rs.getInt("quantiteStockProduit");
                 produits.add(new Produit(nomProduit, prixUnitaireHTProduit, quantiteStockProduit));
-
             }
-
             return produits;
         } catch (SQLException e) {
             e.printStackTrace();
-
             throw new DAOException();
         }
     }
